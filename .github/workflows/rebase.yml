@@ -23,6 +23,12 @@ jobs:
     name: Rebase from main into main-dev
     needs: versioning
     if: ${{ github.event.pull_request.base.ref == 'main' && github.event.pull_request.head.ref == 'main-dev' && github.event.pull_request.merged == true }}
+    if: >-
+      github.event.issue.pull_request != '' && 
+      (
+        contains(github.event.comment.body, '/rebase') || 
+        contains(github.event.comment.body, '/autosquash')
+      )
     runs-on: ubuntu-latest
 
     steps:
