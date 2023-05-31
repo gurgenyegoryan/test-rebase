@@ -19,7 +19,13 @@ jobs:
   rebase:
     name: Rebase from main into main-dev
     needs: versioning
-    if: ${{ github.event.issue.pull_request != '' }}
+    # if: ${{ github.event.issue.pull_request != '' }}
+    if: >-
+      github.event.issue.pull_request != '' && 
+      (
+        contains(github.event.comment.body, '/rebase') || 
+        contains(github.event.comment.body, '/autosquash')
+      )
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the latest code
@@ -30,6 +36,7 @@ jobs:
 
       - name: Automatic Rebase
         uses: cirrus-actions/rebase@1.2
-
+        with:
+          autosquash: ${{ contains(github.event.comment.body, '/autosquash') || contains(github.event.comment.body, '/rebase-autosquash') }}
         env:
           GITHUB_TOKEN: ${{ secrets.mytoken }}
