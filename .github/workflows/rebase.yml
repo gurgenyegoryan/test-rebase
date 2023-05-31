@@ -31,7 +31,7 @@ jobs:
       - name: Perform Rebase
         run: |
           git fetch origin
-          git rebase origin/main
+          git rebase -i origin/main
 
       - name: Check Rebase Result
         run: |
