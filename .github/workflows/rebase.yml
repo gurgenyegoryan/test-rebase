@@ -33,13 +33,3 @@ jobs:
           git checkout $GITHUB_HEAD_REF
           git rebase $GITHUB_BASE_REF
           git push origin $GITHUB_HEAD_REF
-
-      - name: Check Rebase Result
-        run: |
-          if [ $? -eq 0 ]; then
-            echo "Rebase was successful"
-            # Perform additional steps or actions if needed
-          else
-            echo "Rebase failed"
-            # Handle failed rebase scenario
-          fi
