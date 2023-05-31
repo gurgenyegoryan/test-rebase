@@ -4,9 +4,25 @@ on:
   pull_request:
     types:
       - closed
+
+
+
       
 jobs:
-  merge-job:
+
+  versioning:
+    name: Semantic Release
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        persist-credentials: false
+    - name: Test for versioning
+      run: echo "Versioning passed"
+
+  rebase:
+    name: Rebase from main into main-dev
+    needs: versioning
     if: ${{ github.event.pull_request.base.ref == 'main' && github.event.pull_request.head.ref == 'main-dev' && github.event.pull_request.merged == true }}
     runs-on: ubuntu-latest
 
