@@ -33,3 +33,13 @@ jobs:
           git checkout main-dev
           git rebase main
           git push origin main-dev
+
+      - name: Check Rebase Result
+        run: |
+          if [ $? -eq 0 ]; then
+            echo "Rebase was successful"
+            # Perform additional steps or actions if needed
+          else
+            echo "Rebase failed"
+            # Handle failed rebase scenario
+          fi
