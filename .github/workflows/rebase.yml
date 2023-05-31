@@ -16,4 +16,4 @@ jobs:
 
       - name: Rebase main into main-dev
         run: |
-          git status
+          cat .github/workflows/rebase.yml
