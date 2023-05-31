@@ -1,7 +1,7 @@
 name: Rebase main-dev branch
 
 on:
-  pull_request:
+  push:
     branches: ["main"]
 
 jobs:
@@ -21,9 +21,7 @@ jobs:
     needs: versioning
     if: >-
       ${{ github.event.pull_request.base.ref == 'main' && 
-        github.event.pull_request.head.ref == 'main-dev' && 
-        github.event.pull_request.merged == true && 
-        github.event.pull_request.state == 'closed' }}
+        github.event.pull_request.head.ref == 'main-dev' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the latest code
