@@ -15,4 +15,5 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Rebase main into main-dev
-        run: echo "Hello"
+        run: |
+          git status
