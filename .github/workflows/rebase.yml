@@ -31,6 +31,5 @@ jobs:
       - name: Perform Rebase
         run: |
           git checkout main-dev
-          git status
           git rebase main
           git push origin main-dev
