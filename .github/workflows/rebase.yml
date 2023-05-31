@@ -31,5 +31,6 @@ jobs:
       - name: Perform Rebase
         run: |
           git checkout $GITHUB_HEAD_REF
+          git status
           git rebase $GITHUB_BASE_REF
           git push origin $GITHUB_HEAD_REF
