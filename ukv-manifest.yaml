@@ -1,0 +1,53 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ukv
+  namespace: default
+  labels:
+    app: ukv
+    project: unum-project
+spec:
+  selector:
+    matchLabels:
+      app: ukv
+  template:
+    metadata:
+      labels:
+        app: ukv
+    spec:
+      serviceAccountName: default
+      terminationGracePeriodSeconds: 5
+      containers:
+      - name: ukv-container
+        image: gurgenyegoryan/ukv-test:latest
+        ports:
+        - containerPort: 38709
+          name: rpc
+        env:
+        - name: PORT
+          value: "50051"
+        resources:
+          requests:
+            cpu: 100m
+            memory: 200Mi
+          limits:
+            cpu: 200m
+            memory: 2000Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ukv
+  namespace: default
+  labels:
+    app: ukv
+    project: ukv-container
+spec:
+  type: ClusterIP
+  selector:
+    app: ukv
+  ports:
+  - name: rpc
+    port: 38709
+    targetPort: rpc 

@@ -1,0 +1,10 @@
+[Unit]
+Description=Systemd service, that running scripts in main.sh .
+
+[Service]
+ExecStart=/usr/bin/main.sh
+
+[Install]
+Restart=always
+WantedBy=multi-user.target
+
