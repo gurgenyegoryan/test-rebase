@@ -23,7 +23,7 @@ jobs:
     if: >-
       ${{ github.event.pull_request.base.ref == 'main' && 
         github.event.pull_request.head.ref == 'main-dev' && 
-        github.event.pull_request.merged == true || }}
+        github.event.pull_request.merged == true }}
     runs-on: ubuntu-latest
 
     steps:
