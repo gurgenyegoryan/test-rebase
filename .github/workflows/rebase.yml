@@ -4,6 +4,11 @@ on:
   push:
     branches: ["main"]
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
 
   versioning:
@@ -25,11 +30,16 @@ jobs:
       - name: Checkout the latest code
         uses: actions/checkout@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
       - name: Perform Rebase
         run: |
           git checkout main-dev
           git rebase main
-          git push origin main-dev
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # branch: ${{ github.ref }}
+          branch: main-dev
