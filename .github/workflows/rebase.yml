@@ -32,3 +32,14 @@ jobs:
         uses: cirrus-actions/rebase@1.2
         env:
           GITHUB_TOKEN: ${{ secrets.mytoken }}
+      
+      - name: Check Rebase Result
+        run: |
+          git fetch origin
+          if git merge-base --is-ancestor HEAD origin/main; then
+            echo "Rebase was successful"
+            # Perform additional steps or actions if needed
+          else
+            echo "Rebase failed"
+            # Handle failed rebase scenario
+          fi
