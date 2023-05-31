@@ -20,8 +20,8 @@ jobs:
     name: Rebase from main into main-dev
     needs: versioning
     if: >-
-      ${{ github.event.pull_request.base.ref == 'main' && 
-        github.event.pull_request.head.ref == 'main-dev' }}
+      ${{ github.event.pull_request.base.ref == 'main-dev' && 
+        github.event.pull_request.head.ref == 'main' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the latest code
