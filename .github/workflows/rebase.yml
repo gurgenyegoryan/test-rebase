@@ -1,0 +1,22 @@
+name: Rebase main-dev branch
+
+on:
+  pull_request:
+    types:
+      - closed
+      
+jobs:
+  merge-job:
+    if: ${{ github.event.pull_request.base.ref == 'main' && github.event.pull_request.head.ref == 'main-dev' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Rebase main into main-dev
+        run: |
+          git fetch origin
+          git checkout main-dev
+          git rebase origin/main
+          git push --force-with-lease
