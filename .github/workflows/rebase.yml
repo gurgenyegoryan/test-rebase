@@ -30,9 +30,7 @@ jobs:
 
       - name: Perform Rebase
         run: |
-          echo $GITHUB_HEAD_REF
-          echo $GITHUB_BASE_REF
-          git checkout $GITHUB_HEAD_REF
+          git checkout main-dev
           git status
-          git rebase $GITHUB_BASE_REF
-          git push origin $GITHUB_HEAD_REF
+          git rebase main
+          git push origin main-dev
