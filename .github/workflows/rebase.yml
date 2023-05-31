@@ -35,8 +35,9 @@ jobs:
       
       - name: Check Rebase Result
         run: |
-          git fetch origin
-          if git merge-base --is-ancestor HEAD origin/main; then
+          if git status | grep -q "rebasing"; then
+            echo "Rebase is in progress"
+          elif git status | grep -q "successfully rebased"; then
             echo "Rebase was successful"
             # Perform additional steps or actions if needed
           else
