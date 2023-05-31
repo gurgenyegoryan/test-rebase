@@ -15,10 +15,4 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Rebase main into main-dev
-        run: |
-          git fetch origin
-          git checkout main
-          git pull origin main
-          git checkout main-dev
-          git rebase main
-          git push --force-with-lease
+        run: echo "Hello"
