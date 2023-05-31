@@ -30,9 +30,9 @@ jobs:
 
       - name: Perform Rebase
         run: |
-          git status
-          git fetch origin
-          git rebase origin/main-dev
+          git checkout main-dev
+          git rebase main
+          git push
 
       - name: Check Rebase Result
         run: |
