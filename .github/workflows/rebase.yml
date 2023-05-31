@@ -35,5 +35,7 @@ jobs:
 
       - name: Rebase main into main-dev
         uses: cirrus-actions/rebase@1.8
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+        # env:
+        #   GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+        with:
+          base: main-dev
