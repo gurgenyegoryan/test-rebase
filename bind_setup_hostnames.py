@@ -12,12 +12,15 @@ ns_ip = '192.168.4.101'
 ns_path = '/etc/bind/'
 file_rfc = ns_path + 'named.rfc1912.zones'
 
+# test
+
 
 def up_hosts():
     global ns_ip
     ipaddress_list = []
     for ip in tqdm(ipaddress.IPv4Network('192.168.4.0/24'), desc="Start searching for active ip addresses"):
-        status, result = subprocess.getstatusoutput("timeout 0.2 ping -c1 " + str(ip))
+        status, result = subprocess.getstatusoutput(
+            "timeout 0.2 ping -c1 " + str(ip))
         if status == 0:
             ipaddress_list.append(str(ip))
     try:
