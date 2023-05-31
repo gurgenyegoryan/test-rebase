@@ -30,9 +30,9 @@ jobs:
 
       - name: Perform Rebase
         run: |
-          git status
-          git fetch origin
-          git rebase origin/main-dev
+          git checkout main-dev
+          git rebase main
+          git push origin main-dev
 
       - name: Check Rebase Result
         run: |
@@ -43,22 +43,3 @@ jobs:
             echo "Rebase failed"
             # Handle failed rebase scenario
           fi
-
-      # - name: Automatic Rebase
-      #   uses: cirrus-actions/rebase@1.2
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.mytoken }}
-      
-      # - name: Check Rebase Result
-      #   run: |
-      #     if git status | grep -q "rebasing"; then
-      #       echo "Rebase is in progress"
-      #     elif git status | grep -q "successfully rebased"; then
-      #       echo "Rebase was successful"
-      #       # Perform additional steps or actions if needed
-      #     else
-      #       echo "Rebase failed"
-      #       # Handle failed rebase scenario
-      #     fi
-
-# add tututu
