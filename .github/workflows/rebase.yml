@@ -2,6 +2,7 @@ name: Rebase main-dev branch
 
 on:
   push:
+    branches: ["main-dev"]
   pull_request:
     branches: ["main-dev"]
 
