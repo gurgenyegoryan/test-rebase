@@ -2,7 +2,8 @@ name: Rebase main-dev branch
 
 on:
   push:
-    branches: ["main"]
+  pull_request:
+    branches: ["main-dev"]
 
 permissions:
   contents: write
