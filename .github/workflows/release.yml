@@ -37,11 +37,15 @@ jobs:
           git checkout main-dev
           git rebase origin/main
       - name: Push changes
-        uses: ad-m/github-push-action@master
+        # uses: ad-m/github-push-action@master
+        # with:
+        #   github_token: ${{ secrets.GITHUB_TOKEN }}
+        #   branch: main-dev
+        #   force: true
+        uses: CasperWA/push-protected@v2
         with:
-          github_token: ${{ secrets.mytoken }}
-          branch: main-dev
-          force: true
+          token: ${{ secrets.MYTOKEN }}
+          force: True
 
   # add comment
   # comment
