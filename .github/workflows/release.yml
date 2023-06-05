@@ -44,7 +44,7 @@ jobs:
         #   force: true
         uses: CasperWA/push-protected@v2
         with:
-          token: ${{ secrets.MYTOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           force: True
           branch: main-dev
 
