@@ -31,14 +31,3 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-
-      - name: Perform Rebase
-        run: |
-          git checkout main-dev
-          git rebase origin/main
-
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: main-dev
