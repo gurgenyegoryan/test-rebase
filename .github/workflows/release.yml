@@ -1,0 +1,45 @@
+name: Release
+
+on:
+  push:
+    branches: ["main"]
+
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+
+  versioning:
+    name: Semantic Release
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        persist-credentials: false
+    - name: Test for versioning
+      run: echo "Versioning passed"
+
+  rebase:
+    name: Rebase from main into main-dev
+    needs: versioning
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the latest code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      
+      - name: Perform Rebase
+        run: |
+          git checkout main-dev
+          git rebase main
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main-dev
+
+  
