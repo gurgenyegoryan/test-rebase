@@ -22,24 +22,24 @@ jobs:
     - name: Test for versioning
       run: echo "Versioning passed"
 
-  # rebase:
-  #   name: Rebase from main into main-dev
-  #   needs: versioning
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout the latest code
-  #       uses: actions/checkout@v3
-  #       with:
-  #         fetch-depth: 0
+  rebase:
+    name: Rebase from main into main-dev
+    needs: versioning
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the latest code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       
-  #     - name: Perform Rebase
-  #       run: |
-  #         git checkout main-dev
-  #         git rebase origin/main
-  #     - name: Push changes
-  #       uses: ad-m/github-push-action@master
-  #       with:
-  #         github_token: ${{ secrets.GITHUB_TOKEN }}
-  #         branch: main-dev
+      - name: Perform Rebase
+        run: |
+          git checkout main-dev
+          git rebase origin/main
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main-dev
 
   
