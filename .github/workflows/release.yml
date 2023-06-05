@@ -35,7 +35,7 @@ jobs:
       - name: Perform Rebase
         run: |
           git checkout main-dev
-          git rebase main
+          git rebase origin/main
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
