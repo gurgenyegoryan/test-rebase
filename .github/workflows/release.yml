@@ -53,7 +53,8 @@ jobs:
         with:
           token: ${{ secrets.REBASE }}
           branch: main-dev
-          unprotect_reviews: true
+          unprotect_reviews: True
+          force: True
 
   # add comment
   # comment
