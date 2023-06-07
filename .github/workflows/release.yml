@@ -36,12 +36,6 @@ jobs:
         run: |
           git checkout main-dev
           git rebase origin/main
-      - name: Push changes
-        uses: CasperWA/push-protected@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          force: True
-          branch: main-dev
 
       - name: Push to protected branch
         uses: CasperWA/push-protected@v2
@@ -51,14 +45,19 @@ jobs:
           unprotect_reviews: True
           force: True
 
-        - uses: MCJack123/ghaction-generate-release-hashes@v3
-          with:
-            hash-type: sha1
-            file-name: hashes.txt
-        - uses: actions/upload-artifact@v2
-          with:
-            name: Asset Hashes
-            path: hashes.txt
+      - name: Calculate hash 
+        uses: MCJack123/ghaction-generate-release-hashes@v3
+        with:
+          hash-type: sha256
+          file-name: hashes.txt
+
+      - name: Upload file
+        uses: actions/upload-artifact@v2
+        with:
+          name: Asset Hashes
+          path: hashes.txt
+          
+          
 
   # add comment
   # comment
