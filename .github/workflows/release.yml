@@ -70,6 +70,8 @@ jobs:
         with:
           hash-type: sha256
           file-name: hashes.txt
+        env:
+          BUILD_TYPE: Release
 
       - name: Upload file
         uses: actions/upload-artifact@v2
