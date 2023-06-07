@@ -34,7 +34,19 @@ jobs:
         with:
           fetch-depth: 0
           ref: 'main'
-          persist-credentials: false   
+          persist-credentials: false
+
+      - name: Calculate file hashes
+        run: |
+          find . -type f -not -path './.git/*' -exec sha256sum {} \; | awk '{print $2 " " $1}' > hashes.txt
+
+      - name: Upload docs to release
+        uses: xresloader/upload-to-github-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.REBASE }}
+        with:
+          file: hashes.txt
+          update_latest_release: true   
       
       - name: Perform Rebase
         run: |
@@ -57,18 +69,6 @@ jobs:
 
       - name: Compress assets
         run: tar -czvf docs.tar.gz build/docs/html/
-
-      - name: Calculate file hashes
-        run: |
-          find . -type f -not -path './.git/*' -exec sha256sum {} \; | awk '{print $2 " " $1}' > hashes.txt
-
-      - name: Upload docs to release
-        uses: xresloader/upload-to-github-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.REBASE }}
-        with:
-          file: hashes.txt
-          update_latest_release: true
 
       - name: Upload file
         uses: actions/upload-artifact@v2
