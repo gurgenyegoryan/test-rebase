@@ -57,18 +57,20 @@ jobs:
       - name: Compress assets
         run: tar -czvf docs.tar.gz build/docs/html/
 
+      - name: Calculate file hashes
+        run: |
+          find . -type f -exec sha256sum {} \; | awk '{print $2 " " $1}' > hashes.txt
+          cat hashes.txt
+
       - name: Upload docs to release
         uses: xresloader/upload-to-github-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.REBASE }}
         with:
-          file: docs.tar.gz
+          file: hashes.txt
           update_latest_release: true
 
-      - name: Calculate file hashes
-        run: |
-          find . -type f -exec sha256sum {} \; > hashes.txt
-          cat hashes.txt
+      
 
       # - name: Calculate hash 
       #   uses: MCJack123/ghaction-generate-release-hashes@v3
