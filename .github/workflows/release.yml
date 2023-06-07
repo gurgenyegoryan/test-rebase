@@ -48,7 +48,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.REBASE }}
         with:
-          file: hashes.txt
+          file: hashes.md
           update_latest_release: true   
       
       - name: Perform Rebase
