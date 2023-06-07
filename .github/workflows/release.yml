@@ -33,6 +33,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+          ref: 'main'   
       
       - name: Perform Rebase
         run: |
@@ -47,11 +48,18 @@ jobs:
           unprotect_reviews: True
           force: True
 
+      - name: Copy assets
+        run: cp -r assets build/docs/html/
+
+      - name: Compress assets
+        run: tar -czvf docs.tar.gz build/docs/html/
+
       - name: Upload docs to release
         uses: xresloader/upload-to-github-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.REBASE }}
         with:
+          file: docs.tar.gz
           update_latest_release: true
 
       - name: Calculate hash 
