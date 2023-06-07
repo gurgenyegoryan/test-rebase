@@ -48,6 +48,9 @@ jobs:
           unprotect_reviews: True
           force: True
 
+      - name: Create folder
+        run: mkdir -p build/docs/html/
+
       - name: Copy assets
         run: cp -r assets build/docs/html/
 
