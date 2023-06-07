@@ -65,13 +65,18 @@ jobs:
           file: docs.tar.gz
           update_latest_release: true
 
-      - name: Calculate hash 
-        uses: MCJack123/ghaction-generate-release-hashes@v3
-        with:
-          hash-type: sha256
-          file-name: hashes.txt
-        env:
-          BUILD_TYPE: Release
+      - name: Calculate file hashes
+        run: |
+          find . -type f -exec sha256sum {} \; > hashes.txt
+          cat hashes.txt
+
+      # - name: Calculate hash 
+      #   uses: MCJack123/ghaction-generate-release-hashes@v3
+      #   with:
+      #     hash-type: sha256
+      #     file-name: hashes.txt
+      #   env:
+      #     BUILD_TYPE: Release
 
       - name: Upload file
         uses: actions/upload-artifact@v2
