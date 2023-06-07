@@ -38,8 +38,10 @@ jobs:
 
       - name: Calculate file hashes
         run: |
-          echo "File Name     Hash" > hashes.txt
-          find . -type f -not -path './.git/*' -exec sha256sum {} \; | awk '{printf "%-15s %s\n", $2, $1}' >> hashes.txt
+          echo "| File Name | Hash |" > hashes.md
+          echo "| --- | --- |" >> hashes.md
+          find . -type f -not -path './.git/*' -exec sh -c 'echo "| $(basename {}) | $(sha256sum {} | awk "{print \$1}") |"' \; >> hashes.md
+          cat hashes.md
 
       - name: Upload docs to release
         uses: xresloader/upload-to-github-release@v1
