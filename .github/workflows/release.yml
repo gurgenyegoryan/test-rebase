@@ -40,8 +40,7 @@ jobs:
         run: |
           echo "| File Name | Hash |" > hashes.md
           echo "| --- | --- |" >> hashes.md
-          find . -type f -not -path './.git/*' -exec sh -c 'echo "| $(basename {}) | $(sha256sum {} | awk "{print \$1}") |"' \; >> hashes.md
-          cat hashes.md
+          find . -type f -not -path './.git/*' -exec sh -c 'echo "| $(realpath --relative-to=. {}) | $(sha256sum {} | awk "{print \$1}") |"' \; >> hashes.md
 
       - name: Upload docs to release
         uses: xresloader/upload-to-github-release@v1
@@ -64,21 +63,6 @@ jobs:
           unprotect_reviews: True
           force: True
 
-      - name: Create folder
-        run: mkdir -p build/docs/html/
-
-      - name: Copy assets
-        run: cp -r assets build/docs/html/
-
-      - name: Compress assets
-        run: tar -czvf docs.tar.gz build/docs/html/
-
-      - name: Upload file
-        uses: actions/upload-artifact@v2
-        with:
-          name: Asset Hashes
-          path: hashes.txt
-          
           
 
   # add comment
