@@ -47,6 +47,13 @@ jobs:
           unprotect_reviews: True
           force: True
 
+      - name: Upload docs to release
+        uses: xresloader/upload-to-github-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.REBASE }}
+        with:
+          update_latest_release: true
+
       - name: Calculate hash 
         uses: MCJack123/ghaction-generate-release-hashes@v3
         with:
