@@ -38,6 +38,7 @@ jobs:
         token: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
         tag: v1.22.4
         name: My Creative Name
+        allow_override: true
         body: >
           This release actually changes the fabric of the reality, so be careful 
           while applying, as error in database migration, can irrecoverably wipe 
