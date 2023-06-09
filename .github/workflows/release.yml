@@ -24,7 +24,9 @@ jobs:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
 
+    - run: find -name *tar.gz
     - run: npm install --save-dev @semantic-release/exec @semantic-release/git conventional-changelog-eslint semantic-release && npx semantic-release
+    - run: find -name *tar.gz
 
   rebase:
     name: Rebase from main into main-dev
