@@ -21,6 +21,7 @@ jobs:
     steps:
 
     - uses: actions/upload-artifact@v3
+      run: pwd
       with:
         if-no-files-found: error
         name: my-arifact
