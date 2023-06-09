@@ -24,6 +24,8 @@ jobs:
         persist-credentials: false
     - uses: actions/setup-node@v3
     - run: npm install --save-dev @semantic-release/exec @semantic-release/git @semantic-release/github conventional-changelog-eslint semantic-release && npx semantic-release
+      env:
+          GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
 
   rebase:
     name: Rebase from main into main-dev
