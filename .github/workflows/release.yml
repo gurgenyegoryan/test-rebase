@@ -23,23 +23,44 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
-    - run: |
-          cd /home/runner/work/test-rebase/
-          echo '<details>' >> SourceCodeSHA256.md
-          echo '<summary>Assets</summary>' >> SourceCodeSHA256.md
-          echo "" >> SourceCodeSHA256.md
-          find . -type f -not -path './test-rebase/.git/*' -not -name 'SourceCodeSHA256.md' -exec sh -c 'echo "* $(realpath --relative-to=. {}) : \`$(sha256sum {} | awk "{print \$1}")\`"' \; >> SourceCodeSHA256.md
-          echo '</details>' >> SourceCodeSHA256.md
+    # - run: |
+    #       cd /home/runner/work/test-rebase/
+    #       echo '<details>' >> SourceCodeSHA256.md
+    #       echo '<summary>Assets</summary>' >> SourceCodeSHA256.md
+    #       echo "" >> SourceCodeSHA256.md
+    #       find . -type f -not -path './test-rebase/.git/*' -not -name 'SourceCodeSHA256.md' -exec sh -c 'echo "* $(realpath --relative-to=. {}) : \`$(sha256sum {} | awk "{print \$1}")\`"' \; >> SourceCodeSHA256.md
+    #       echo '</details>' >> SourceCodeSHA256.md
 
     - run: npm install --save-dev @semantic-release/changelog @semantic-release/exec @semantic-release/git conventional-changelog-eslint semantic-release && npx semantic-release
 
-    - name: Update assets
-      id: update_release
-      uses: tubone24/update_release@v1.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
+    # - name: Update assets
+    #   id: update_release
+    #   uses: tubone24/update_release@v1.0
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
+    #   with:
+    #     body: test_body # new body text
+
+    - name: Add Text to Release
+      uses: actions/github-script@v4
       with:
-        body: test_body # new body text
+        github-token: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
+        script: |
+            const releaseId = context.payload.release.id;
+            const textToAdd = `SourceCode.zip sha256\nSourceCode.tar.gz sha256`;
+
+            const { data: release } = await github.repos.getRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              release_id: releaseId,
+            });
+
+            await github.repos.updateRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              release_id: releaseId,
+              body: release.body + '\n\n' + textToAdd,
+            });
 
 
   rebase:
