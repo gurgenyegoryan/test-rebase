@@ -75,9 +75,6 @@
       [
         "@semantic-release/github",
         {
-          "labels": [
-            "Test Test"
-          ],
           "assets": [
             {
               "path": "/home/runner/work/test-rebase/test-rebase/VERSION",
