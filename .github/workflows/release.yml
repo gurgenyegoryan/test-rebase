@@ -27,10 +27,10 @@ jobs:
     - run: |
           cd /home/runner/work/test-rebase/
           echo '<details>' >> SourceCodeSHA256.md
-          echo '<summary>Assets</summary>' >> SourceCode256.md
-          echo "" >> SourceCode256.md
-          find . -type f -not -path './test-rebase/.git/*' -not -name 'SourceCode.md' -exec sh -c 'echo "* $(realpath --relative-to=. {}) : \`$(sha256sum {} | awk "{print \$1}")\`"' \; >> SourceCode256.md
-          echo '</details>' >> SourceCode256.md
+          echo '<summary>Assets</summary>' >> SourceCodeSHA256.md
+          echo "" >> SourceCodeSHA256.md
+          find . -type f -not -path './test-rebase/.git/*' -not -name 'SourceCodeSHA256.md' -exec sh -c 'echo "* $(realpath --relative-to=. {}) : \`$(sha256sum {} | awk "{print \$1}")\`"' \; >> SourceCodeSHA256.md
+          echo '</details>' >> SourceCodeSHA256.md
 
     - run: npm install --save-dev @semantic-release/exec @semantic-release/git conventional-changelog-eslint semantic-release && npx semantic-release
 
