@@ -69,6 +69,10 @@
             {
               "path": "assets/test",
               "label": "CSS distribution"
+            },
+            {
+              "path": "test/script.sh",
+              "label": "distribution"
             }
           ]
         }
