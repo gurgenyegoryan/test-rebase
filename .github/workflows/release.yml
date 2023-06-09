@@ -33,16 +33,36 @@ jobs:
 
     - run: npm install --save-dev @semantic-release/changelog @semantic-release/exec @semantic-release/git conventional-changelog-eslint semantic-release && npx semantic-release
 
-    - uses: meeDamian/github-release@2.0
+    # - uses: meeDamian/github-release@2.0
+    #   with:
+    #     token: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
+    #     tag: v1.22.4
+    #     name: My Creative Name
+    #     allow_override: true
+    #     body: >
+    #       This release actually changes the fabric of the reality, so be careful 
+    #       while applying, as error in database migration, can irrecoverably wipe 
+    #       some laws of physics.
+    - name: Add Text to Release
+      uses: actions/github-script@v4
       with:
-        token: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
-        tag: v1.22.4
-        name: My Creative Name
-        allow_override: true
-        body: >
-          This release actually changes the fabric of the reality, so be careful 
-          while applying, as error in database migration, can irrecoverably wipe 
-          some laws of physics.
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { data: releases } = await github.repos.listReleases({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+
+            const latestRelease = releases[0];
+            const textToAdd = `SourceCOde.zip sha256\nSourceCode.tar.gz sha256`;
+
+            const updatedBody = latestRelease.body + '\n\n### Hashes\n' + textToAdd;
+            await github.repos.updateRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              release_id: latestRelease.id,
+              body: updatedBody,
+            });
 
 
   rebase:
