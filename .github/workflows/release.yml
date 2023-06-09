@@ -21,9 +21,9 @@ jobs:
     steps:
 
     - uses: actions/upload-artifact@v3
-        with:
-          if-no-files-found: error
-          path: |
+      with:
+        if-no-files-found: error
+        path: |
             VERSION
             update_version.sh
 
