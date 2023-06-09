@@ -23,6 +23,7 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
         if-no-files-found: error
+        name: my-arifact
         path: |
             /home/runner/work/test-rebase/test-rebase/VERSION
             /home/runner/work/test-rebase/test-rebase/update_version.sh
