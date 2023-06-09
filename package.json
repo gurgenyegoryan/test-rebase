@@ -8,7 +8,6 @@
   },
   "author": "Gurgen Yegoryan",
   "license": "Apache2.0",
-  "dependencies": {},
   "devDependencies": {
     "@semantic-release/error": "^4.0.0",
     "@semantic-release/exec": "github:semantic-release/exec",
