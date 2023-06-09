@@ -58,7 +58,7 @@
         [
             "@semantic-release/exec",
             {
-                "prepareCmd": "bash .github/workflows/update_version.sh '${nextRelease.version}'"
+                "prepareCmd": "echo '${nextRelease.version}' > VERSION"
             }
         ],
         [
