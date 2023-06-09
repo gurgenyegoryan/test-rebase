@@ -19,9 +19,8 @@ jobs:
     name: Semantic Release
     runs-on: ubuntu-latest
     steps:
-
+    - run: pwd
     - uses: actions/upload-artifact@v3
-      run: pwd
       with:
         if-no-files-found: error
         name: my-arifact
