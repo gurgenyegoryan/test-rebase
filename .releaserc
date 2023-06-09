@@ -58,6 +58,7 @@
         {
             "assets": [
                 {
+                    "path": "assets/test",
                     "label": "CSS distribution"
                 }
             ]
