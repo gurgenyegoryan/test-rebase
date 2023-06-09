@@ -19,11 +19,25 @@ jobs:
     name: Semantic Release
     runs-on: ubuntu-latest
     steps:
+
+    - uses: actions/upload-artifact@v3
+        with:
+          if-no-files-found: error
+          path: |
+            VERSION
+            update_version.sh
+
+
     - uses: actions/checkout@v3
       with:
         persist-credentials: false
+    
+    - uses: actions/download-artifact@v3
+
     - uses: actions/setup-node@v3
-    - run: npm install --save-dev @semantic-release/exec @semantic-release/git @semantic-release/github conventional-changelog-eslint semantic-release && npx semantic-release
+      with:
+          node-version: "18.x"
+    - run: npx semantic-release 
       env:
           GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
           NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
