@@ -24,8 +24,8 @@ jobs:
       with:
         if-no-files-found: error
         path: |
-            VERSION
-            update_version.sh
+            /home/runner/work/test-rebase/test-rebase/VERSION
+            /home/runner/work/test-rebase/test-rebase/update_version.sh
 
 
     - uses: actions/checkout@v3
