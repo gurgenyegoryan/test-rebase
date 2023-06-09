@@ -79,16 +79,6 @@
           "failTitle": false,
           "assets": [
             {
-              "path": "/home/runner/work/test-rebase/test-rebase/assets/test.js",
-              "name": "cat-tracker-Thingy91-nbiot-nodebug-${nextRelease.gitTag}.hex",
-              "label": "Pre-build HEX file for Thingy:91 NB-IoT"
-            },
-            {
-              "path": "/home/runner/work/test-rebase/test-rebase/test/script.js",
-              "name": "cat-tracker-Thingy91-nbiot-nodebug-app_upgrade-${nextRelease.gitTag}.bin",
-              "label": "App upgrade file for Thingy:91 NB-IoT"
-            },
-            {
               "path": "/home/runner/work/test-rebase/test-rebase/VERSION",
               "name": "cat-tracker-nRF9160DK-nbiot-nodebug-${nextRelease.gitTag}.hex",
               "label": "Pre-build HEX file for nRF9160 DK NB-IoT"
