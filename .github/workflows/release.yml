@@ -54,12 +54,14 @@ jobs:
             const latestRelease = releases[0];
             const textToAdd = `SourceCode.zip sha256\nSourceCode.tar.gz sha256`;
 
-            await github.repos.updateRelease({
+            const updatedRelease = await github.repos.updateRelease({
               owner: context.repo.owner,
               repo: context.repo.repo,
               release_id: latestRelease.id,
               body: latestRelease.body + '\n\n' + textToAdd,
             });
+
+            console.log('Updated Release:', updatedRelease);
 
 
   rebase:
