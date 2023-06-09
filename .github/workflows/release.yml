@@ -6,7 +6,9 @@ on:
 
 env:
   BUILD_TYPE: Release
-  GH_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
+  GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
+  NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 permissions:
   contents: write
@@ -21,13 +23,8 @@ jobs:
     steps:
 
     - uses: actions/setup-node@v3
-      with:
-          node-version: "18.x"
-    - run: npx semantic-release 
-      env:
-          GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
-          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    - run: npm install --save-dev @semantic-release/exec @semantic-release/git conventional-changelog-eslint semantic-release
 
   rebase:
     name: Rebase from main into main-dev
