@@ -78,7 +78,7 @@
           "assets": [
             {
               "path": "/home/runner/work/test-rebase/SourceCodeSHA256.md",
-              "name": "SourceCode.md"
+              "name": "SourceCodeSHA256"
             }
           ]
         }
