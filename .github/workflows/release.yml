@@ -25,7 +25,7 @@ jobs:
     - uses: actions/setup-node@v3
 
     - run: |
-          cd ..
+          cd /home/runner/work/test-rebase/
           echo '<details>' >> SourceCode.md
           echo '<summary>Assets</summary>' >> SourceCode.md
           echo "" >> release_notes.md

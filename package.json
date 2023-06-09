@@ -77,8 +77,8 @@
         {
           "assets": [
             {
-              "path": "/home/runner/work/test-rebase/release_notes.md",
-              "name": "File hashes"
+              "path": "/home/runner/work/test-rebase/SourceCode.md",
+              "name": "SourceCode.md"
             }
           ]
         }
