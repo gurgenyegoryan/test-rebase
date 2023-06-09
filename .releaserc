@@ -58,8 +58,8 @@
         {
             "assets": [
                 {
-                    "path": "assets/test",
-                    "label": "CSS distribution"
+                    "path": "releases/*.zip",
+                    "label": "Our Demo Package (${nextRelease.version})"
                 }
             ]
         },
@@ -70,7 +70,7 @@
                     "VERSION",
                     "conanfile.py",
                     "package.json",
-                    "Cargo.toml",
+                    "Cargo.toml"
                 ],
                 "message": "Build: Released ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
             }
