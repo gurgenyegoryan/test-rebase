@@ -42,10 +42,10 @@ jobs:
     #     body: test_body # new body text
 
     - name: Add Text to Release
-        uses: actions/github-script@v4
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
+      uses: actions/github-script@v4
+      with:
+        github-token: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
+        script: |
             const { data: releases } = await github.repos.listReleases({
               owner: context.repo.owner,
               repo: context.repo.repo,
