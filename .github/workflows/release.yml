@@ -31,7 +31,17 @@ jobs:
           find . -type f -not -path './test-rebase/.git/*' -not -name 'SourceCodeSHA256.md' -exec sh -c 'echo "* $(realpath --relative-to=. {}) : \`$(sha256sum {} | awk "{print \$1}")\`"' \; >> SourceCodeSHA256.md
           echo '</details>' >> SourceCodeSHA256.md
 
-    - run: npm install --save-dev @semantic-release/changelog @semantic-release/exec @semantic-release/git conventional-changelog-eslint semantic-release && npx semantic-release && find -name *CHANGELOG*
+    - run: npm install --save-dev @semantic-release/changelog @semantic-release/exec @semantic-release/git \
+            conventional-changelog-eslint semantic-release && npx semantic-release
+
+    - name: Update assets
+      id: update_release
+      uses: tubone24/update_release@v1.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
+      with:
+        body: test_body # new body text
+
 
   rebase:
     name: Rebase from main into main-dev
