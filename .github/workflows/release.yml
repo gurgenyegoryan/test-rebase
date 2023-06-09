@@ -44,7 +44,7 @@ jobs:
     - name: Add Text to Release
       uses: actions/github-script@v4
       with:
-        github-token: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
+        github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
             const { data: releases } = await github.repos.listReleases({
               owner: context.repo.owner,
@@ -54,14 +54,12 @@ jobs:
             const latestRelease = releases[0];
             const textToAdd = `SourceCode.zip sha256\nSourceCode.tar.gz sha256`;
 
-            const updatedRelease = await github.repos.updateRelease({
+            await github.repos.updateRelease({
               owner: context.repo.owner,
               repo: context.repo.repo,
               release_id: latestRelease.id,
               body: latestRelease.body + '\n\n' + textToAdd,
             });
-
-            console.log('Updated Release:', updatedRelease);
 
 
   rebase:
