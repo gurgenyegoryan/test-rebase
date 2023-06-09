@@ -79,7 +79,7 @@
           "failTitle": false,
           "assets": [
             {
-              "label": "Pre-build HEX file for nRF9160 DK NB-IoT"
+              "name": "cat-tracker-nRF9160DK-nbiot-nodebug-${nextRelease.gitTag}.hex"
             }
           ]
         }
