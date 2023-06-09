@@ -68,11 +68,9 @@
         {
           "assets": [
             {
-              "path": "/home/runner/work/test-rebase/test-rebase/assets/test",
               "label": "CSS distribution"
             },
             {
-              "path": "/home/runner/work/test-rebase/test-rebase/test/script.sh",
               "label": "JS distribution"
             }
           ]
