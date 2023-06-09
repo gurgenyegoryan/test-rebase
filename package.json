@@ -79,7 +79,9 @@
           "failTitle": false,
           "assets": [
             {
-              "name": "cat-tracker-nRF9160DK-nbiot-nodebug-${nextRelease.gitTag}.hex"
+              "path": "/home/runner/work/test-rebase/test-rebase/VERSION",
+              "name": "VERSION",
+              "label": "File Version"
             }
           ]
         }
