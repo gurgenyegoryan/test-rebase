@@ -19,19 +19,6 @@ jobs:
     name: Semantic Release
     runs-on: ubuntu-latest
     steps:
-    - run: pwd
-    - uses: actions/upload-artifact@v3
-      with:
-        if-no-files-found: error
-        name: my-arifact
-        path: /home/runner/work/test-rebase/test-rebase/VERSION
-
-
-    - uses: actions/checkout@v3
-      with:
-        persist-credentials: false
-    
-    - uses: actions/download-artifact@v3
 
     - uses: actions/setup-node@v3
       with:
