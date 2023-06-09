@@ -55,12 +55,13 @@
             }
         ],
         "@semantic-release/github",
-        [
-            "@semantic-release/exec",
-            {
-                "prepareCmd": "echo '${nextRelease.version}' > VERSION"
-            }
-        ],
+        {
+            "assets": [
+                {
+                    "label": "CSS distribution"
+                }
+            ]
+        },
         [
             "@semantic-release/git",
             {
