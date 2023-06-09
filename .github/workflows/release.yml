@@ -35,12 +35,12 @@ jobs:
             conventional-changelog-eslint semantic-release && npx semantic-release
 
     - name: Update assets
-        id: update_release
-        uses: tubone24/update_release@v1.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
-        with:
-          body: test_body # new body text
+      id: update_release
+      uses: tubone24/update_release@v1.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
+      with:
+        body: test_body # new body text
 
 
   rebase:
