@@ -6,6 +6,7 @@ on:
 
 env:
   BUILD_TYPE: Release
+  GH_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
 
 permissions:
   contents: write
