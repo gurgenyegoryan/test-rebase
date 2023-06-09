@@ -79,8 +79,18 @@
             {
               "path": "/home/runner/work/test-rebase/SourceCodeSHA256.md",
               "name": "SourceCodeSHA256.md"
+            },
+            {
+              "path": "/home/runner/work/test-rebase/test-rebase/docs/CHANGELOG.md",
+              "name": "SourceCodeSHA256.md"
             }
           ]
+        }
+      ],
+      [
+        "@semantic-release/changelog",
+        {
+          "changelogFile": "docs/CHANGELOG.md"
         }
       ],
       [
