@@ -77,9 +77,8 @@
         {
           "assets": [
             {
-              "path": "/home/runner/work/test-rebase/test-rebase/VERSION",
-              "name": "VERSION",
-              "label": "File Version"
+              "path": "/home/runner/work/test-rebase/release_notes.md",
+              "name": "File hashes"
             }
           ]
         }
