@@ -25,7 +25,7 @@ jobs:
     - uses: actions/setup-node@v3
 
     - run: npm install --save-dev @semantic-release/exec @semantic-release/git conventional-changelog-eslint semantic-release
-    - run: npx semantic-release
+    - run: cd /home/runner/work/test-rebase/test-rebase/ && npx semantic-release
 
   rebase:
     name: Rebase from main into main-dev
