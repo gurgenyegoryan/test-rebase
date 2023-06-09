@@ -1,9 +1,76 @@
 {
-  "devDependencies": {
-    "@semantic-release/exec": "^6.0.3",
-    "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^9.0.3",
-    "conventional-changelog-eslint": "^4.0.0",
-    "semantic-release": "^21.0.3"
-  }
+  "branches": [
+    "main"
+  ],
+  "debug": true,
+  "ci": true,
+  "dryRun": false,
+  "plugins": [
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "preset": "eslint",
+        "releaseRules": [
+          {
+            "tag": "Add",
+            "release": "minor"
+          },
+          {
+            "tag": "Improve",
+            "release": "patch"
+          },
+          {
+            "tag": "Make",
+            "release": "patch"
+          },
+          {
+            "tag": "Refactor",
+            "release": false
+          }
+        ]
+      }
+    ],
+    [
+      "@semantic-release/release-notes-generator",
+      {
+        "preset": "eslint",
+        "releaseRules": [
+          {
+            "tag": "Add",
+            "release": "minor"
+          },
+          {
+            "tag": "Improve",
+            "release": "patch"
+          },
+          {
+            "tag": "Make",
+            "release": "patch"
+          },
+          {
+            "tag": "Refactor",
+            "release": false
+          }
+        ]
+      }
+    ],
+    "@semantic-release/github",
+    {
+      "assets": [
+        "dist/**"
+      ]
+    },
+    [
+      "@semantic-release/git",
+      {
+        "assets": [
+          "VERSION",
+          "conanfile.py",
+          "package.json",
+          "Cargo.toml"
+        ],
+        "message": "Build: Released ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      }
+    ]
+  ]
 }
