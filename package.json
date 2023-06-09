@@ -79,8 +79,6 @@
           "failTitle": false,
           "assets": [
             {
-              "path": "/home/runner/work/test-rebase/test-rebase/VERSION",
-              "name": "cat-tracker-nRF9160DK-nbiot-nodebug-${nextRelease.gitTag}.hex",
               "label": "Pre-build HEX file for nRF9160 DK NB-IoT"
             }
           ]
