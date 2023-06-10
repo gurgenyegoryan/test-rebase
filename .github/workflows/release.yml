@@ -33,36 +33,39 @@ jobs:
 
     - run: npm install --save-dev @semantic-release/changelog @semantic-release/exec @semantic-release/git conventional-changelog-eslint semantic-release && npx semantic-release
 
-    # - uses: meeDamian/github-release@2.0
-    #   with:
-    #     token: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
-    #     tag: v1.22.4
-    #     name: My Creative Name
-    #     allow_override: true
-    #     body: >
-    #       This release actually changes the fabric of the reality, so be careful 
-    #       while applying, as error in database migration, can irrecoverably wipe 
-    #       some laws of physics.
-    - name: Add Text to Release
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Get Latest Release ID
+      id: latest_release
       uses: actions/github-script@v4
       with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const { data: releases } = await github.repos.listReleases({
+        github-token: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
+        script: |
+            const response = await github.repos.listReleases({
               owner: context.repo.owner,
-              repo: context.repo.repo,
+              repo: context.repo.repo
             });
+            const latestRelease = response.data[0];
+            console.log('Latest Release ID:', latestRelease.id);
+            return latestRelease.id
 
-            const latestRelease = releases[0];
-            const textToAdd = `SourceCOde.zip sha256\nSourceCode.tar.gz sha256`;
+    - name: Update Release Notes
+      run: |
+          ACCESS_TOKEN="${{ secrets.GITHUB_TOKEN }}"
+          RELEASE_ID="${{ steps.latest_release.outputs.result }}"
 
-            const updatedBody = latestRelease.body + '\n\n### Hashes\n' + textToAdd;
-            await github.repos.updateRelease({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              release_id: latestRelease.id,
-              body: updatedBody,
-            });
+          RELEASE_NOTES=$(curl -s -H "Authorization: Bearer $ACCESS_TOKEN" \
+              "https://api.github.com/repos/${GITHUB_REPOSITORY}/releases/${RELEASE_ID}")
+
+          RELEASE_BODY=$(echo "$RELEASE_NOTES" | jq -r '.body')
+
+          NEW_RELEASE_BODY="${RELEASE_BODY}"$'\n'"Your additional text goes here."
+
+          curl -s -X PATCH -H "Authorization: Bearer $ACCESS_TOKEN" \
+              -H "Accept: application/vnd.github.v3+json" \
+              "https://api.github.com/repos/${GITHUB_REPOSITORY}/releases/${RELEASE_ID}" \
+              -d "{\"body\": \"${NEW_RELEASE_BODY}\"}"
 
 
   rebase:
