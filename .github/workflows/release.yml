@@ -34,7 +34,7 @@ jobs:
     - run: npm install --save-dev @semantic-release/changelog @semantic-release/exec @semantic-release/git conventional-changelog-eslint semantic-release && npx semantic-release
 
     - name: Checkout Repository
-        uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Get Latest Release ID
       id: latest_release
