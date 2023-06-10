@@ -52,15 +52,19 @@ jobs:
 
     - name: Update Release Notes
       run: |
-          ACCESS_TOKEN="${{ secrets.SEMANTIC_RELEASE_TOKEN }}"
-          RELEASE_ID="${{ steps.latest_release.outputs.result }}"
-          curl -L \
+        ACCESS_TOKEN="${{ secrets.SEMANTIC_RELEASE_TOKEN }}"
+        RELEASE_ID="${{ steps.latest_release.outputs.result }}"
+        echo $RELEASE_ID
+        REPO_OWNER="${{ github.repository_owner }}"
+        REPO_NAME="${{ github.repository }}"
+        
+        curl -L \
           -X PATCH \
           -H "Accept: application/vnd.github+json" \
-          -H "Authorization: Bearer $ACCESS_TOKEN"\
+          -H "Authorization: Bearer $ACCESS_TOKEN" \
           -H "X-GitHub-Api-Version: 2022-11-28" \
-          https://api.github.com/repos/gurgenyegoryan/test-rebase/releases/"$RELEASE_ID" \
-          -d '{"tag_name":"v1.22.9","target_commitish":"main","name":"v1.22.9","body":"Description of the release","draft":false,"prerelease":false}'
+          "https://api.github.com/repos/$REPO_OWNER/$REPO_NAME/releases/$RELEASE_ID" \
+          -d '{"body": "Your updated release notes"}'
 
           
           
