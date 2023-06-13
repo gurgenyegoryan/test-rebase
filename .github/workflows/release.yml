@@ -58,7 +58,6 @@ jobs:
         name: "Beta"
         prerelease: false
         body: "This is a pre-release version for testing purposes."
-        files: "changelog.md,testcoverage.md"
  
           
           
