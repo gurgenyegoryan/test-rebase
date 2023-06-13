@@ -23,26 +23,19 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
-    # - run: |
-    #       cd /home/runner/work/test-rebase/
-    #       echo '<details>' >> SourceCodeSHA256.md
-    #       echo '<summary>Assets</summary>' >> SourceCodeSHA256.md
-    #       echo "" >> SourceCodeSHA256.md
-    #       find . -type f -not -path './test-rebase/.git/*' -not -name 'SourceCodeSHA256.md' -exec sh -c 'echo "* $(realpath --relative-to=. {}) : \`$(sha256sum {} | awk "{print \$1}")\`"' \; >> SourceCodeSHA256.md
-    #       echo '</details>' >> SourceCodeSHA256.md
 
     - run: npm install --save-dev @semantic-release/changelog @semantic-release/exec @semantic-release/git conventional-changelog-eslint semantic-release && npx semantic-release
 
     - name: Checkout Repository
       uses: actions/checkout@v3
 
-    - name: "call action"
-      id: last_release
-      uses: InsonusK/get-latest-release@v1.0.1
-      with:
-        myToken: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
-        exclude_types: "release"
-        view_top: 1
+    # - name: "call action"
+    #   id: last_release
+    #   uses: InsonusK/get-latest-release@v1.0.1
+    #   with:
+    #     myToken: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
+    #     exclude_types: "release"
+    #     view_top: 1
 
     - name: Edit Release
       uses: irongut/EditRelease@v1.2.0
