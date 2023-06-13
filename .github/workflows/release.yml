@@ -39,9 +39,6 @@ jobs:
     - name: Get Latest Release ID
       id: latestrelease
       uses: pozetroninc/github-action-get-latest-release@master
-      with:
-          repo: test-rebase
-          excludes: prerelease, draft
 
     - name: Edit Release
       uses: irongut/EditRelease@v1.2.0
