@@ -43,7 +43,10 @@ jobs:
         myToken: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
         exclude_types: "release"
         view_top: 1
-      run: echo "id: ${{ steps.last_release.outputs.id }}"
+      - name: "Print result"
+        run: |
+          echo "id: ${{ steps.last_release.outputs.id }}"
+          echo "name: ${{ steps.last_release.outputs.name }}"
 
     - name: Edit Release
       uses: irongut/EditRelease@v1.2.0
