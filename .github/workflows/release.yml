@@ -37,12 +37,10 @@ jobs:
     #     exclude_types: "release"
     #     view_top: 1
 
-    - name: Add Test Report to Release
-      uses: irongut/EditRelease@v1.2.0
+    - name: Update Release Notes
+      uses: release-drafter/release-drafter@v5
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        id: ${{ github.event.release.id }}
-        body: "Released to GitHub Packages."          
+        token: ${{ secrets.GITHUB_TOKEN }}        
           
 
   rebase:
