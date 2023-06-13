@@ -54,7 +54,7 @@ jobs:
       uses: irongut/EditRelease@v1.2.0
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        id: ${{ steps.latest_release.outputs.id }}
+        id: ${{ steps.latest_release.outputs.latestRelease.id }}
         name: "Beta"
         prerelease: false
         body: "This is a pre-release version for testing purposes."
