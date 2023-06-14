@@ -44,7 +44,7 @@ jobs:
     - name: Calculate Hashes
       id: calculate_hashes
       run: |
-          file1_hash=$(sha256sum $GITHUB_WORKSPACE/download_assets/test-rebase-v1.24.7.zip | awk '{print $1}')
+          file1_hash=$(sha256sum $GITHUB_WORKSPACE/download_assets/test-rebase-v1.24.7.zip)
           file2_hash=$(sha256sum $GITHUB_WORKSPACE/download_assets/test-rebase-v1.24.7.tar.gz | awk '{print $1}')
 
     - name: Get latest release
@@ -61,7 +61,7 @@ jobs:
         id: ${{ steps.get_latest_release.outputs.release_id }}
         prerelease: false
         replacebody: false
-        body: "**Hashes** Source Code.zip - `${{ steps.calculate_hashes.outputs.file1_hash }}` Source code.tar.gz - `${{ steps.calculate_hashes.outputs.file2_hash }}`"
+        body: "**Hashes Source Code.zip - ${{ steps.calculate_hashes.outputs.file1_hash }}"
           
 
   rebase:
