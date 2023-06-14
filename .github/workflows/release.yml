@@ -79,7 +79,7 @@ jobs:
     - name: Calculate Hashes
       id: calculate_hashes
       run: |
-          echo "last_tag = ${{ steps.get_latest_release.outputs.last_tag }}"
+          echo "last_tag = v1.24.21"
           source_zip_hash=$(sha256sum $GITHUB_WORKSPACE/download_assets/$last_tag.zip | awk '{print $1}')
           source_tar_hash=$(sha256sum $GITHUB_WORKSPACE/download_assets/$last_tag.tar.gz | awk '{print $1}')
           echo "source_zip_hash=$source_zip_hash" >> $GITHUB_OUTPUT
