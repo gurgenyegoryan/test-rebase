@@ -37,8 +37,8 @@ jobs:
       with:
         token: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
         id: ${{ github.event.release.id }}
-        name: "Beta"
-        prerelease: true
+        name: "Source code hashes"
+        prerelease: false
         body: "This is a pre-release version for testing purposes."   
           
 
