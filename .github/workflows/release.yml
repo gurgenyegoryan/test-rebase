@@ -49,6 +49,7 @@ jobs:
           source_tar=$(find $GITHUB_WORKSPACE/download_assets -name "*.tar.gz")
           file2_hash=$(sha256sum "$source_tar" | awk '{print $1}')
           echo "::set-output name=file1_hash::$file1_hash"
+          echo "::set-output name=file2_hash::$file2_hash"
 
     - name: Get latest release
       id: get_latest_release
@@ -64,7 +65,7 @@ jobs:
         id: ${{ steps.get_latest_release.outputs.release_id }}
         prerelease: false
         replacebody: false
-        body: "## Hashes \
+        body: "## Hashes  \
               Source code(zip) - `${{ steps.calculate_hashes.outputs.file1_hash }}` \
               Source code(tar.gz) - `${{ steps.calculate_hashes.outputs.file2_hash }}`"
           
