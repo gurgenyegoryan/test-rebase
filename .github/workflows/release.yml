@@ -45,9 +45,8 @@ jobs:
         latest: true
         fileName: "*"
         out-file-path: "download_assets"
-            latest: true
-            tarBall: true
-            zipBall: true
+        tarBall: true
+        zipBall: true
 
     - name: Check repo
       run: |
