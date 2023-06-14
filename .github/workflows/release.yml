@@ -82,6 +82,8 @@ jobs:
         source_zip_hash=$(sha256sum "$source_zip_path" | awk '{print $1}')
         source_tar_path=$(find $GITHUB_WORKSPACE/download_assets -name "*.tar.gz" ! -name "docs.tar.gz")
         source_tar_hash=$(sha256sum "$source_tar_path" | awk '{print $1}')
+        ls $source_zip_path
+        ls $source_tar_path
         echo "source_zip_hash=$source_zip_hash" >> $GITHUB_OUTPUT
         echo "source_tar_hash=$source_tar_hash" >> $GITHUB_OUTPUT
           
