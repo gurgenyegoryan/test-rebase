@@ -75,8 +75,8 @@ jobs:
           source_zip_hash=$(sha256sum "$source_zip" | awk '{print $1}')
           source_tar=$(find $GITHUB_WORKSPACE/download_assets -name "*.tar.gz")
           source_tar_hash=$(sha256sum "$source_tar" | awk '{print $1}')
-          echo "{source_zip_hash}={$source_zip_hash}" >> $GITHUB_OUTPUT
-          echo "{source_tar}={$source_zip_hash}" >> $GITHUB_OUTPUT
+          echo "source_zip_hash=$source_zip_hash" >> $GITHUB_OUTPUT
+          echo "source_tar_hash=$source_tar_hash" >> $GITHUB_OUTPUT
           
 
     - name: Get latest release
