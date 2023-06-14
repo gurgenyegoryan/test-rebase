@@ -60,7 +60,8 @@ jobs:
         token: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
         id: ${{ steps.get_latest_release.outputs.release_id }}
         prerelease: false
-        body: |
+        replacebody: false
+        body: >
         **Hashes**
          Source Code.zip - `${{ steps.calculate_hashes.outputs.file1_hash }}`
 
