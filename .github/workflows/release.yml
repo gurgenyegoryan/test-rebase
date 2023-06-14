@@ -45,12 +45,15 @@ jobs:
         latest: true
         fileName: "*"
         out-file-path: "download_assets"
-
-    - name: Calculate Hashes
-      id: calculate_hashes
       run: |
           echo "Hiiiiiiiiiiiiii"
           ls $GITHUB_WORKSPACE/download_assets
+
+    # - name: Calculate Hashes
+    #   id: calculate_hashes
+    #   run: |
+    #       echo "Hiiiiiiiiiiiiii"
+    #       ls $GITHUB_WORKSPACE/download_assets
 
     - name: Edit Release
       uses: irongut/EditRelease@v1.2.0
