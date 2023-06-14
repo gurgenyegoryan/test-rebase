@@ -96,4 +96,4 @@ jobs:
         body: |
             ## Hashes
             * Source code (zip) : `${{ steps.calculate_hashes.outputs.source_zip_hash }}` 
-            * Source code (tar.gz) : `${{ steps.calculate_hashes.outputs.source_zip_hash }}`
+            * Source code (tar.gz) : `${{ steps.calculate_hashes.outputs.source_tar_hash }}`
