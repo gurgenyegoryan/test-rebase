@@ -61,10 +61,10 @@ jobs:
         id: ${{ steps.get_latest_release.outputs.release_id }}
         prerelease: false
         body: |
-        "**Hashes
+        **Hashes**
          Source Code.zip - `${{ steps.calculate_hashes.outputs.file1_hash }}`
 
-         Source code.tar.gz - `${{ steps.calculate_hashes.outputs.file2_hash }}` "   
+         Source code.tar.gz - `${{ steps.calculate_hashes.outputs.file2_hash }}`  
           
 
   rebase:
