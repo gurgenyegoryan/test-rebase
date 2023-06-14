@@ -64,8 +64,8 @@ jobs:
       run: |
           response=$(curl -s -H "Authorization: Bearer ${{ secrets.SEMANTIC_RELEASE_TOKEN }}" \
             "https://api.github.com/repos/${{ github.repository }}/releases/latest")
-          echo "release_id=$(echo "$response" | jq -r '.id')" >> $GITHUB_OUTPUT
-          echo "last_tag=$(echo "$response" | jq -r '.tag')" >> $GITHUB_OUTPUT
+          echo "last_release_id=$(echo "$response" | jq -r '.id')" >> $GITHUB_OUTPUT
+          echo "last_release_tag=$(echo "$response" | jq -r '.tag_name')" >> $GITHUB_OUTPUT
 
     - uses: robinraju/release-downloader@v1.8
       name: Download assets files
@@ -79,9 +79,9 @@ jobs:
     - name: Calculate Hashes
       id: calculate_hashes
       run: |
-          echo "last_tag = v1.24.21"
-          source_zip_hash=$(sha256sum $GITHUB_WORKSPACE/download_assets/$last_tag.zip | awk '{print $1}')
-          source_tar_hash=$(sha256sum $GITHUB_WORKSPACE/download_assets/$last_tag.tar.gz | awk '{print $1}')
+          echo "last_tag = ${{ steps.get_latest_release.outputs.last_release_tag }}"
+          source_zip_hash=$(sha256sum $GITHUB_WORKSPACE/download_assets/${last_tag}.zip | awk '{print $1}')
+          source_tar_hash=$(sha256sum $GITHUB_WORKSPACE/download_assets/${last_tag}.tar.gz | awk '{print $1}')
           echo "source_zip_hash=$source_zip_hash" >> $GITHUB_OUTPUT
           echo "source_tar_hash=$source_tar_hash" >> $GITHUB_OUTPUT
           
@@ -90,7 +90,7 @@ jobs:
       uses: irongut/EditRelease@v1.2.0
       with:
         token: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
-        id: ${{ steps.get_latest_release.outputs.release_id }}
+        id: ${{ steps.get_latest_release.outputs.last_release_id }}
         prerelease: false
         replacebody: false
         body: |
