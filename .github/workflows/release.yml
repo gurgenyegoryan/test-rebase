@@ -24,13 +24,13 @@ jobs:
     name: Semantic Release
     runs-on: ubuntu-latest
     steps:
-    # - uses: actions/checkout@v3
-    # - uses: actions/setup-node@v3
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
 
-    # - run: npm install --save-dev @semantic-release/changelog @semantic-release/exec @semantic-release/git conventional-changelog-eslint semantic-release && npx semantic-release
+    - run: npm install --save-dev @semantic-release/changelog @semantic-release/exec @semantic-release/git conventional-changelog-eslint semantic-release && npx semantic-release
 
-    # - name: Checkout Repository
-    #   uses: actions/checkout@v3
+    - name: Checkout Repository
+      uses: actions/checkout@v3
 
     
     - uses: robinraju/release-downloader@v1.8
@@ -64,8 +64,9 @@ jobs:
         id: ${{ steps.get_latest_release.outputs.release_id }}
         prerelease: false
         replacebody: false
-        body: "##Hashes Source Code.zip \
-              ${{ steps.calculate_hashes.outputs.file1_hash }}"
+        body: "## Hashes \
+              Source code(zip) - `${{ steps.calculate_hashes.outputs.file1_hash }}` \
+              Source code(tar.gz) - `${{ steps.calculate_hashes.outputs.file2_hash }}`"
           
 
   rebase:
