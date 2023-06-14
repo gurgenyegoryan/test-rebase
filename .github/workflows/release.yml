@@ -32,13 +32,6 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v3
 
-    - name: Get latest release
-      id: get_latest_release
-      run: |
-          response=$(curl -s -H "Authorization: Bearer ${{ secrets.SEMANTIC_RELEASE_TOKEN }}" \
-            "https://api.github.com/repos/${{ github.repository }}/releases/latest")
-          echo "::set-output name=release_id::$(echo "$response" | jq -r '.id')"
-
     
     - uses: robinraju/release-downloader@v1.8
       with:
@@ -48,16 +41,18 @@ jobs:
         tarBall: true
         zipBall: true
 
-    - name: Check repo
+    - name: Calculate Hashes
+      id: calculate_hashes
       run: |
-          echo "Hiiiiiiiiiiiiii"
-          ls $GITHUB_WORKSPACE/download_assets
+          file1_hash=$(sha256sum $GITHUB_WORKSPACE/download_assets/test-rebase-v1.24.7.zip | awk '{print $1}')
+          file2_hash=$(sha256sum $GITHUB_WORKSPACE/download_assets/test-rebase-v1.24.7.tar.gz | awk '{print $1}')
 
-    # - name: Calculate Hashes
-    #   id: calculate_hashes
-    #   run: |
-    #       echo "Hiiiiiiiiiiiiii"
-    #       ls $GITHUB_WORKSPACE/download_assets
+    - name: Get latest release
+      id: get_latest_release
+      run: |
+          response=$(curl -s -H "Authorization: Bearer ${{ secrets.SEMANTIC_RELEASE_TOKEN }}" \
+            "https://api.github.com/repos/${{ github.repository }}/releases/latest")
+          echo "::set-output name=release_id::$(echo "$response" | jq -r '.id')"
 
     - name: Edit Release
       uses: irongut/EditRelease@v1.2.0
@@ -65,7 +60,11 @@ jobs:
         token: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
         id: ${{ steps.get_latest_release.outputs.release_id }}
         prerelease: false
-        body: "This is a pre-release version for testing purposes."   
+        body: |
+        "**Hashes
+         Source Code.zip - `${{ steps.calculate_hashes.outputs.file1_hash }}`
+
+         Source code.tar.gz - `${{ steps.calculate_hashes.outputs.file2_hash }}` "   
           
 
   rebase:
