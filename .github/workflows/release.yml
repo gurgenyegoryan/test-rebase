@@ -45,7 +45,12 @@ jobs:
         latest: true
         fileName: "*"
         out-file-path: "download_assets"
-    - run: |
+            latest: true
+            tarBall: true
+            zipBall: true
+
+    - name: Check repo
+      run: |
           echo "Hiiiiiiiiiiiiii"
           ls $GITHUB_WORKSPACE/download_assets
 
