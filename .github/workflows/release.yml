@@ -76,7 +76,7 @@ jobs:
         zipBall: true
 
     - name: Calculate source hashes
-      id: calculate_hashes
+      id: hashes
       run: |
         source_zip_path=$(find $GITHUB_WORKSPACE/downloads -name "*.zip")
         zip_hash=$(sha256sum "$source_zip_path" | awk '{print $1}')
