@@ -54,7 +54,7 @@ jobs:
   #         force: True
 
   hashes:
-    name: Caluclate hashes
+    name: Hashes in release
     runs-on: ubuntu-latest
     needs: versioning
     steps:
@@ -75,8 +75,9 @@ jobs:
           source_zip_hash=$(sha256sum "$source_zip" | awk '{print $1}')
           source_tar=$(find $GITHUB_WORKSPACE/download_assets -name "*.tar.gz")
           source_tar_hash=$(sha256sum "$source_tar" | awk '{print $1}')
-          echo "::set-output name=source_zip_hash::$source_zip_hash"
-          echo "::set-output name=source_zip_hash::$source_zip_hash"
+          echo "{source_zip_hash}={$source_zip_hash}" >> $GITHUB_OUTPUT
+          echo "{source_tar}={$source_zip_hash}" >> $GITHUB_OUTPUT
+          
 
     - name: Get latest release
       id: get_latest_release
@@ -94,5 +95,5 @@ jobs:
         replacebody: false
         body: |
             ## Hashes
-            * Source code(zip) - `${{ steps.calculate_hashes.outputs.source_zip_hash }}` 
-            * Source code(tar.gz) - `${{ steps.calculate_hashes.outputs.source_zip_hash }}`
+            * Source code (zip) : `${{ steps.calculate_hashes.outputs.source_zip_hash }}` 
+            * Source code (tar.gz) : `${{ steps.calculate_hashes.outputs.source_zip_hash }}`
