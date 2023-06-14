@@ -21,19 +21,20 @@ permissions:
 jobs:
 
   versioning:
-    name: Semantic Release
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
+    # name: Semantic Release
+    # runs-on: ubuntu-latest
+    # steps:
+    # - uses: actions/checkout@v3
+    # - uses: actions/setup-node@v3
 
-    - run: npm install --save-dev @semantic-release/changelog @semantic-release/exec @semantic-release/git conventional-changelog-eslint semantic-release && npx semantic-release
+    # - run: npm install --save-dev @semantic-release/changelog @semantic-release/exec @semantic-release/git conventional-changelog-eslint semantic-release && npx semantic-release
 
-    - name: Checkout Repository
-      uses: actions/checkout@v3
+    # - name: Checkout Repository
+    #   uses: actions/checkout@v3
 
     
     - uses: robinraju/release-downloader@v1.8
+      id:
       with:
         latest: true
         fileName: "*"
@@ -44,8 +45,11 @@ jobs:
     - name: Calculate Hashes
       id: calculate_hashes
       run: |
-          file1_hash=$(sha256sum $GITHUB_WORKSPACE/download_assets/test-rebase-v1.24.7.zip)
-          file2_hash=$(sha256sum $GITHUB_WORKSPACE/download_assets/test-rebase-v1.24.7.tar.gz | awk '{print $1}')
+          source_zip=$(find $GITHUB_WORKSPACE/download_assets -name "*.zip")
+          file1_hash=$(sha256sum "$source_zip" | awk '{print $1}')
+          source_tar=$(find $GITHUB_WORKSPACE/download_assets -name "*.tar.gz")
+          file2_hash=$(sha256sum "$source_tar" | awk '{print $1}')
+          echo "::set-output name=file1_hash::$file1_hash"
 
     - name: Get latest release
       id: get_latest_release
