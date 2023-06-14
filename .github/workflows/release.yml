@@ -62,10 +62,10 @@ jobs:
         prerelease: false
         replacebody: false
         body: >
-        **Hashes**
+        "**Hashes**
          Source Code.zip - `${{ steps.calculate_hashes.outputs.file1_hash }}`
 
-         Source code.tar.gz - `${{ steps.calculate_hashes.outputs.file2_hash }}`  
+         Source code.tar.gz - `${{ steps.calculate_hashes.outputs.file2_hash }}`"
           
 
   rebase:
