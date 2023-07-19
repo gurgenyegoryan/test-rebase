@@ -32,5 +32,5 @@ jobs:
     
     - name: Login and publish
       run: |
-        wasmer login --token "${{ secrets.WASMER_TOKEN }}"
-        wasmer publish
+        ~/.wasmer/bin/wasmer login --token "${{ secrets.WASMER_TOKEN }}"
+        ~/.wasmer/bin/wasmer publish
