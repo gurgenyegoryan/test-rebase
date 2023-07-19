@@ -27,10 +27,9 @@ jobs:
     - name: Trigger Wasmer.io CLI
       run: curl https://get.wasmer.io -sSfL | sh
       
-    - name: Source
-      run: source ~/.wasmer/wasmer.sh
-    
-    - name: Login and publish
+    - name: Trigger Wasmer.io CLI
       run: |
-        ~/.wasmer/bin/wasmer login "${{ secrets.WASMER_TOKEN }}"
-        ~/.wasmer/bin/wasmer publish
+        curl https://get.wasmer.io -sSfL | sh
+        source ~/.wasmer/wasmer.sh
+        wasmer login "${{ secrets.WASMER_TOKEN }}"
+        wasmer publish
