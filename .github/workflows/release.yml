@@ -25,8 +25,12 @@ jobs:
     - run: git submodule update --init --recursive
     
     - name: Trigger Wasmer.io CLI
+      run: curl https://get.wasmer.io -sSfL | sh
+      
+    - name: Source
+      run: source ~/.wasmer/wasmer.sh
+    
+    - name: Login and publish
       run: |
-        curl https://get.wasmer.io -sSfL | sh
-        source ~/.wasmer/wasmer.sh
         wasmer login --token "${{ secrets.WASMER_TOKEN }}"
         wasmer publish
